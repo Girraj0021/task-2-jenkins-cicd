@@ -20,14 +20,12 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                echo 'Deploying the application...'
-                sh 'docker stop task2-container || true'
-                sh 'docker rm task2-container || true'
-                sh 'docker run -d -p 8080:80 --name task2-container task2-app'
-            }
-        }
+    steps {
+        echo 'Deploying the application...'
+        sh 'docker rm -f task2-container || true'
+        sh 'docker run -d -p 8082:80 --name task2-container task2-app'
     }
+}
 
     post {
         success {
